@@ -8,8 +8,15 @@
 This repository contains a few visual effects that I use in various projects.
 
 ### 🧩 Install
-_Coming soon_
+- **Fireworks**:<br/>
+  `yarn add @basmilius/effects-fireworks`<br/>
+  `npm install @basmilius/effects-fireworks`<br/>
+  <br/>
+
+- **Snow**:<br/>
+  `yarn add @basmilius/effects-snow`<br/>
+  `npm install @basmilius/effects-snow`
 
 ### 👀 Previews
-- **Fireworks**: _Coming soon_
-- **Snow**: _Coming soon_
+- **Fireworks**: https://basmilius.github.io/visual-effects/example/fireworks.html
+- **Snow**: https://basmilius.github.io/visual-effects/example/snow.html
