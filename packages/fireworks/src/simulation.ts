@@ -66,7 +66,7 @@ export class FireworkSimulation extends LimitedFrameRateCanvas {
 
     createFirework(): void {
         const hue = this.hue;
-        const x = this.positionRandom.nextBetween(100, this.width - 100);
+        const x = this.positionRandom.nextBetween(innerWidth * .1, this.width - innerWidth * .1);
         const y = this.height * .1 + this.positionRandom.nextBetween(0, this.height * .5);
 
         const firework = new Firework({x: x * .5 + innerWidth / 4, y: this.height}, {x, y}, hue, this.lineWidth);

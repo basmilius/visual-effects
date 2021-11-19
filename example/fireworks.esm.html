@@ -6,7 +6,7 @@
     {
         margin: 0;
         padding: 0;
-        background: darkslateblue;
+        background: black;
     }</style>
 </head>
 <body>
@@ -28,7 +28,7 @@
         window.addEventListener("load", () =>
         {
             const canvas = document.getElementById("simulation");
-            const simulation = new FireworkSimulation(canvas);
+            const simulation = new FireworkSimulation(canvas, 6);
             simulation.start();
         }, {passive: true});
     </script>
