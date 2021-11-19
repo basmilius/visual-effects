@@ -1,0 +1,13 @@
+{
+    "name": "@basmilius/effects",
+    "private": true,
+    "version": "1.0.0",
+    "author": {
+        "name": "Bas Milius",
+        "email": "bas@mili.us",
+        "url": "https://bas.dev"
+    },
+    "workspaces": [
+        "packages/*"
+    ]
+}

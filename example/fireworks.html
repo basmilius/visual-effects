@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fireworks example | Bas Milius</title>
+    <style>body
+    {
+        margin: 0;
+        padding: 0;
+        background: darkslateblue;
+    }</style>
+</head>
+<body>
+
+    <canvas id="simulation"></canvas>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "@basmilius/effects-common": "../packages/common/dist/basmilius.effects.common.es.js",
+                "@basmilius/effects-fireworks": "../packages/fireworks/dist/basmilius.effects.fireworks.es.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import {FireworkSimulation} from "@basmilius/effects-fireworks";
+
+        window.addEventListener("load", () =>
+        {
+            const canvas = document.getElementById("simulation");
+            const simulation = new FireworkSimulation(canvas);
+            simulation.start();
+        }, {passive: true});
+    </script>
+
+</body>
+</html>
