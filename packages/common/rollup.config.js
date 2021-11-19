@@ -21,6 +21,13 @@ export default {
 			file: packageJson.module,
 			format: "esm",
 			sourcemap: true
+		},
+		{
+			compact: true,
+			file: packageJson.umd,
+			format: "umd",
+            name: "BMEffectsCommon",
+			sourcemap: true
 		}
 	],
 	external: [],

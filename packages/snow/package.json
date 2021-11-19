@@ -1,7 +1,7 @@
 {
     "name": "@basmilius/effects-snow",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": {
         "email": "bas@mili.us",
         "name": "Bas Milius",
@@ -18,12 +18,11 @@
     },
     "main": "./dist/basmilius.effects.snow.js",
     "module": "./dist/basmilius.effects.snow.es.js",
+    "umd": "./dist/basmilius.effects.snow.umd.js",
     "types": "./src/index.ts",
     "dependencies": {
-        "@basmilius/effects-common": "1.0.0",
+        "@basmilius/effects-common": "1.0.1",
         "tslib": "^2.3.1"
-    },
-    "peerDependencies": {
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^21.0.1",

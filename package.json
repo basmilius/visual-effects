@@ -1,11 +1,22 @@
 {
     "name": "@basmilius/effects",
     "private": true,
-    "version": "1.0.0",
+    "version": "1.0.1",
+    "packageManager": "yarn@3.1.0",
     "author": {
         "name": "Bas Milius",
         "email": "bas@mili.us",
         "url": "https://bas.dev"
+    },
+    "scripts": {
+        "build": "concurrently 'yarn workspace @basmilius/effects-common build' 'yarn workspace @basmilius/effects-fireworks build' 'yarn workspace @basmilius/effects-snow build'",
+        "publish:all": "yarn publish:common && yarn publish:fireworks && yarn publish:snow",
+        "publish:common": "yarn workspace @basmilius/effects-common publish --access public",
+        "publish:fireworks": "yarn workspace @basmilius/effects-fireworks publish --access public",
+        "publish:snow": "yarn workspace @basmilius/effects-snow publish --access public"
+    },
+    "dependencies": {
+        "concurrently": "^6.4.0"
     },
     "workspaces": [
         "packages/*"

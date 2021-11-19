@@ -21,7 +21,17 @@ export default {
 			file: packageJson.module,
 			format: "esm",
 			sourcemap: true
-		}
+		},
+        {
+            compact: true,
+            file: packageJson.umd,
+            format: "umd",
+            name: "BMEffectsFireworks",
+            sourcemap: true,
+            globals: {
+                "@basmilius/effects-common": "BMEffectsCommon"
+            }
+        }
 	],
 	external: [
         "@basmilius/effects-common"

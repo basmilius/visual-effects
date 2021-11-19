@@ -52,7 +52,7 @@ export class LimitedFrameRateCanvas {
 
 	constructor(canvas: HTMLCanvasElement, frameRate: number) {
 		this._canvas = canvas;
-		this._context = canvas.getContext("2d");
+		this._context = canvas.getContext("2d", {colorSpace: "display-p3"});
 		this._frameRate = frameRate;
 		this._target = 1000 / frameRate;
 

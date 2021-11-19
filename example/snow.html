@@ -13,25 +13,37 @@
 
     <canvas id="simulation"></canvas>
 
-    <script type="importmap">
-        {
-            "imports": {
-                "@basmilius/effects-common": "../packages/common/dist/basmilius.effects.common.es.js",
-                "@basmilius/effects-snow": "../packages/snow/dist/basmilius.effects.snow.es.js"
-            }
-        }
-    </script>
+    <script src="../packages/common/dist/basmilius.effects.common.umd.js"></script>
+    <script src="../packages/snow/dist/basmilius.effects.snow.umd.js"></script>
 
     <script type="module">
-        import {SnowSimulation} from "@basmilius/effects-snow";
-
         window.addEventListener("load", () =>
         {
             const canvas = document.getElementById("simulation");
-            const simulation = new SnowSimulation(canvas);
+            const simulation = new BMEffectsSnow.SnowSimulation(canvas);
             simulation.start();
         }, {passive: true});
     </script>
+
+<!--    <script type="importmap">-->
+<!--        {-->
+<!--            "imports": {-->
+<!--                "@basmilius/effects-common": "../packages/common/dist/basmilius.effects.common.es.js",-->
+<!--                "@basmilius/effects-snow": "../packages/snow/dist/basmilius.effects.snow.es.js"-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+
+<!--    <script type="module">-->
+<!--        import {SnowSimulation} from "@basmilius/effects-snow";-->
+
+<!--        window.addEventListener("load", () =>-->
+<!--        {-->
+<!--            const canvas = document.getElementById("simulation");-->
+<!--            const simulation = new SnowSimulation(canvas);-->
+<!--            simulation.start();-->
+<!--        }, {passive: true});-->
+<!--    </script>-->
 
 </body>
 </html>
