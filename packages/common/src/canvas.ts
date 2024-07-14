@@ -1,133 +1,129 @@
 export class LimitedFrameRateCanvas {
-    private readonly _canvas: HTMLCanvasElement;
-    private readonly _context: CanvasRenderingContext2D;
-    private _current: number = 0;
-    private _delta: number = 0;
-    private _frame: number = 0;
-    private readonly _frameRate: number;
-    private _now: number = 0;
-    private readonly _target: number;
-    private _then: number = 0;
-    private _ticks: number = 0;
-    private _isStopped: boolean = false;
+    readonly #canvas: HTMLCanvasElement;
+    readonly #context: CanvasRenderingContext2D;
+    readonly #frameRate: number;
+    readonly #target: number;
+    #current: number = 0;
+    #delta: number = 0;
+    #frame: number = 0;
+    #now: number = 0;
+    #then: number = 0;
+    #ticks: number = 0;
+    #isStopped: boolean = false;
+    #height: number = 540;
+    #width: number = 960;
 
-    private _height: number = 540;
-    private _width: number = 960;
-
-    private readonly _boundOnVisibilityChange: (evt: Event) => void;
-    private readonly _boundOnResize: (evt: Event) => void;
-
-    public get canvas(): HTMLCanvasElement {
-        return this._canvas;
+    get canvas(): HTMLCanvasElement {
+        return this.#canvas;
     }
 
-    public get context(): CanvasRenderingContext2D {
-        return this._context;
+    get context(): CanvasRenderingContext2D {
+        return this.#context;
     }
 
-    public get delta(): number {
-        return this._delta;
+    get delta(): number {
+        return this.#delta;
     }
 
-    public get deltaFactor(): number {
-        return this._then === 0 ? 1 : this._target / this._delta;
+    get deltaFactor(): number {
+        return this.#then === 0 ? 1 : this.#target / this.#delta;
     }
 
-    public get frameRate(): number {
-        return this._frameRate;
+    get frameRate(): number {
+        return this.#frameRate;
     }
 
-    public get isSmall(): boolean {
+    get isSmall(): boolean {
         return innerWidth < 991; // dirty little fix :-)
     }
 
-    public get ticks(): number {
-        return this._ticks;
+    get ticks(): number {
+        return this.#ticks;
     }
 
-    public get height(): number {
-        return this._height;
+    get height(): number {
+        return this.#height;
     }
 
-    public get width(): number {
-        return this._width;
+    get width(): number {
+        return this.#width;
     }
 
-    constructor(canvas: HTMLCanvasElement, frameRate: number) {
-        this._canvas = canvas;
-        this._context = canvas.getContext("2d", {colorSpace: "display-p3"});
-        this._frameRate = frameRate;
-        this._target = 1000 / frameRate;
+    constructor(canvas: HTMLCanvasElement, frameRate: number, options: CanvasRenderingContext2DSettings = {colorSpace: 'display-p3'}) {
+        this.#canvas = canvas;
+        this.#context = canvas.getContext('2d', options);
+        this.#frameRate = frameRate;
+        this.#target = 1000 / frameRate;
 
-        this._boundOnVisibilityChange = this.onVisibilityChange.bind(this);
-        this._boundOnResize = this.onResize.bind(this);
+        this.onVisibilityChange = this.onVisibilityChange.bind(this);
+        this.onResize = this.onResize.bind(this);
 
-        document.addEventListener("visibilitychange", this._boundOnVisibilityChange, {passive: true});
-        window.addEventListener("resize", this._boundOnResize, {passive: true});
+        document.addEventListener('visibilitychange', this.onVisibilityChange, {passive: true});
+        window.addEventListener('resize', this.onResize, {passive: true});
     }
 
     loop(): void {
-        if (this._isStopped) {
+        if (this.#isStopped) {
             return;
         }
 
-        this._current = Date.now();
-        this._frame = requestAnimationFrame(this.loop.bind(this));
+        this.#current = Date.now();
+        this.#frame = requestAnimationFrame(this.loop.bind(this));
 
-        if (this._then > 0 && this._current - this._then + 1 < this._target) {
+        if (this.#then > 0 && this.#current - this.#then + 1 < this.#target) {
             return;
         }
 
-        this._now = this._current;
-        this._delta = this._now - this._then;
+        this.#now = this.#current;
+        this.#delta = this.#now - this.#then;
 
-        ++this._ticks;
+        ++this.#ticks;
 
         this.tick();
         this.draw();
 
-        this._then = this._now;
+        this.#then = this.#now;
     }
 
     start(): void {
         this.onResize();
 
-        this._isStopped = false;
-        this._frame = requestAnimationFrame(this.loop.bind(this));
+        this.#isStopped = false;
+        this.#frame = requestAnimationFrame(this.loop.bind(this));
     }
 
     stop(): void {
-        this._isStopped = true;
-        cancelAnimationFrame(this._frame);
+        this.#isStopped = true;
+        cancelAnimationFrame(this.#frame);
     }
 
     draw(): void {
-        throw new Error("LimitedFrameRateCanvas::draw() should be overwritten.")
+        throw new Error('LimitedFrameRateCanvas::draw() should be overwritten.');
     }
 
     tick(): void {
-        throw new Error("LimitedFrameRateCanvas::tick() should be overwritten.")
+        throw new Error('LimitedFrameRateCanvas::tick() should be overwritten.');
     }
 
     destroy(): void {
-        document.removeEventListener("visibilitychange", this._boundOnVisibilityChange);
-        window.removeEventListener("resize", this._boundOnResize);
+        document.removeEventListener('visibilitychange', this.onVisibilityChange);
+        window.removeEventListener('resize', this.onResize);
     }
 
     onResize(): void {
-        const {width, height} = this._canvas.getBoundingClientRect();
-        this._height = height;
-        this._width = width;
+        const {width, height} = this.#canvas.getBoundingClientRect();
+        this.#height = height;
+        this.#width = width;
     }
 
     onVisibilityChange(): void {
-        cancelAnimationFrame(this._frame);
+        cancelAnimationFrame(this.#frame);
 
-        if (document.visibilityState === "visible") {
-            this._then = 0;
+        if (document.visibilityState === 'visible') {
+            this.#then = 0;
             this.start();
         } else {
-            this._then = 0;
+            this.#then = 0;
             this.stop();
         }
     }

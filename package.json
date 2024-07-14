@@ -1,24 +1,15 @@
 {
     "name": "@basmilius/effects",
     "private": true,
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": {
         "name": "Bas Milius",
         "email": "bas@mili.us",
         "url": "https://bas.dev"
     },
     "scripts": {
-        "build": "concurrently 'yarn workspace @basmilius/effects-common build' 'yarn workspace @basmilius/effects-fireworks build' 'yarn workspace @basmilius/effects-snow build'",
-        "dev": "concurrently 'yarn workspace @basmilius/effects-common dev' 'yarn workspace @basmilius/effects-fireworks dev' 'yarn workspace @basmilius/effects-snow dev'",
-        "publish:all": "yarn publish:common && yarn publish:fireworks && yarn publish:snow",
-        "publish:common": "yarn workspace @basmilius/effects-common publish --access public",
-        "publish:fireworks": "yarn workspace @basmilius/effects-fireworks publish --access public",
-        "publish:snow": "yarn workspace @basmilius/effects-snow publish --access public"
-    },
-    "dependencies": {
-        "concurrently": "^6.4.0"
-    },
-    "workspaces": [
-        "packages/*"
-    ]
+        "build": "pnpm --filter '@basmilius/*' -r --parallel build",
+        "dev": "pnpm --filter '@basmilius/*' -r --parallel dev",
+        "publish": "pnpm --filter '@basmilius/*' -r publish --access public --no-git-checks"
+    }
 }

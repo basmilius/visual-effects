@@ -2,36 +2,38 @@
 <html lang="en">
 <head>
     <title>Snow example | Bas Milius</title>
-    <style>body
-    {
-        margin: 0;
-        padding: 0;
-        background: black;
-    }</style>
+    <style>
+        body {
+            height: 100dvh;
+            width: 100dvw;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #0048b4, #062965);
+        }
+    </style>
 </head>
 <body>
 
-    <canvas id="simulation"></canvas>
+<canvas id="simulation"></canvas>
 
-    <script type="importmap">
-        {
-            "imports": {
-                "@basmilius/effects-common": "../packages/common/dist/basmilius.effects.common.es.js",
-                "@basmilius/effects-snow": "../packages/snow/dist/basmilius.effects.snow.es.js"
-            }
+<script type="importmap">
+    {
+        "imports": {
+            "@basmilius/effects-common": "../packages/common/dist/basmilius.effects.common.es.js",
+            "@basmilius/effects-snow": "../packages/snow/dist/basmilius.effects.snow.es.js"
         }
-    </script>
+    }
+</script>
 
-    <script type="module">
-        import {SnowSimulation} from "@basmilius/effects-snow";
+<script type="module">
+    import { SnowSimulation } from '@basmilius/effects-snow';
 
-        window.addEventListener("load", () =>
-        {
-            const canvas = document.getElementById("simulation");
-            const simulation = new SnowSimulation(canvas);
-            simulation.start();
-        }, {passive: true});
-    </script>
+    window.addEventListener('load', () => {
+        const canvas = document.getElementById('simulation');
+        const simulation = new SnowSimulation(canvas);
+        simulation.start();
+    }, {passive: true});
+</script>
 
 </body>
 </html>

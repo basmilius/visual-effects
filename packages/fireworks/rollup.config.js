@@ -1,30 +1,28 @@
-import {default as commonjs} from "@rollup/plugin-commonjs";
-import {default as resolve} from "@rollup/plugin-node-resolve";
-import {default as typescript} from "@rollup/plugin-typescript";
-import {default as peerDepsExternal} from "rollup-plugin-peer-deps-external";
-import {terser} from "rollup-plugin-terser";
 import cleanup from "rollup-plugin-cleanup";
-
-import packageJson from "./package.json";
+import commonjs from "@rollup/plugin-commonjs";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import resolve from "@rollup/plugin-node-resolve";
+import terser from "@rollup/plugin-terser";
+import typescript from "@rollup/plugin-typescript";
 
 export default {
 	input: "./src/index.ts",
 	output: [
 		{
 			compact: true,
-			file: packageJson.main,
+            file: './dist/basmilius.effects.fireworks.js',
 			format: "cjs",
 			sourcemap: true
 		},
 		{
 			compact: true,
-			file: packageJson.module,
+            file: './dist/basmilius.effects.fireworks.es.js',
 			format: "esm",
 			sourcemap: true
 		},
         {
             compact: true,
-            file: packageJson.umd,
+            file: './dist/basmilius.effects.fireworks.umd.js',
             format: "umd",
             name: "BMEffectsFireworks",
             sourcemap: true,
