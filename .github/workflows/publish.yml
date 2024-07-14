@@ -1,0 +1,34 @@
+name: Publish Visual Effects
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 👀 Checkout latest source
+        uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+
+      - name: ✨ Setup node 21.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21.x'
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: 📦️ Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔨 Build
+        run: pnpm build
+
+      - name: 🚀 Publish
+        run: pnpm run publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
