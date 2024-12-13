@@ -1,34 +1,37 @@
 name: Publish Visual Effects
 
 on:
-  release:
-    types: [ published ]
+    release:
+        types: [ published ]
+
+permissions:
+    id-token: write
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 👀 Checkout latest source
-        uses: actions/checkout@v3
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: 👀 Checkout latest source
+                uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 9
+            -   uses: pnpm/action-setup@v2
+                with:
+                    version: 9
 
-      - name: ✨ Setup node 21.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: '21.x'
-          registry-url: https://registry.npmjs.org
-          cache: pnpm
+            -   name: ✨ Setup node 21.x
+                uses: actions/setup-node@v3
+                with:
+                    node-version: '21.x'
+                    registry-url: https://registry.npmjs.org
+                    cache: pnpm
 
-      - name: 📦️ Install dependencies
-        run: pnpm install --frozen-lockfile
+            -   name: 📦️ Install dependencies
+                run: pnpm install --frozen-lockfile
 
-      - name: 🔨 Build
-        run: pnpm --filter '@basmilius/*' -r --parallel build
+            -   name: 🔨 Build
+                run: pnpm --filter '@basmilius/*' -r --parallel build
 
-      - name: 🚀 Publish
-        run: pnpm --filter '@basmilius/*' -r publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            -   name: 🚀 Publish
+                run: pnpm --filter '@basmilius/*' -r publish --access public --no-git-checks
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

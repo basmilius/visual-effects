@@ -24,7 +24,9 @@
         "emitDeclarationOnly": true,
         "experimentalDecorators": true,
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": [
+                "src/*"
+            ]
         }
     },
     "include": [
