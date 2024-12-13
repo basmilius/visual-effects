@@ -1,7 +1,7 @@
 {
     "name": "@basmilius/effects-fireworks",
     "license": "MIT",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "author": {
         "email": "bas@mili.us",
         "name": "Bas Milius",
@@ -13,26 +13,39 @@
         "directory": "packages/fireworks"
     },
     "scripts": {
-        "build": "rollup -c",
-        "dev": "rollup -cw"
+        "build": "pnpm esbuild && pnpm gentypes",
+        "dev": "pnpm esbuild --watch",
+        "esbuild": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/basmilius.effects.fireworks.js",
+        "gentypes": "tsc && tsc-alias"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "files": [
+        "dist/*"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
     },
     "type": "module",
     "main": "./dist/basmilius.effects.fireworks.js",
-    "module": "./dist/basmilius.effects.fireworks.es.js",
-    "umd": "./dist/basmilius.effects.fireworks.umd.js",
+    "module": "./dist/basmilius.effects.fireworks.js",
     "types": "./src/index.ts",
+    "typings": "./src/index.ts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/basmilius.effects.fireworks.js"
+        }
+    },
     "dependencies": {
-        "@basmilius/effects-common": "workspace:*",
-        "tslib": "^2.8.1"
+        "@basmilius/effects-common": "workspace:*"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "^26.0.3",
-        "@rollup/plugin-node-resolve": "^15.3.0",
-        "@rollup/plugin-terser": "^0.4.4",
-        "@rollup/plugin-typescript": "^11.1.6",
-        "rollup": "^4.28.1",
-        "rollup-plugin-cleanup": "^3.2.1",
-        "rollup-plugin-peer-deps-external": "^2.2.4",
+        "esbuild": "^0.24.0",
+        "tsc-alias": "^1.8.10",
         "typescript": "^5.7.2"
     }
 }

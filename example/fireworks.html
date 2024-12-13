@@ -16,14 +16,22 @@
 
     <canvas id="simulation"></canvas>
 
-    <script src="https://unpkg.com/@basmilius/effects-common@1.0.2/dist/basmilius.effects.common.umd.js"></script>
-    <script src="https://unpkg.com/@basmilius/effects-fireworks@1.0.2/dist/basmilius.effects.fireworks.umd.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "@basmilius/effects-common": "../packages/common/dist/basmilius.effects.common.js",
+                "@basmilius/effects-fireworks": "../packages/fireworks/dist/basmilius.effects.fireworks.js"
+            }
+        }
+    </script>
 
     <script type="module">
+        import {FireworkSimulation} from "@basmilius/effects-fireworks";
+
         window.addEventListener("load", () =>
         {
             const canvas = document.getElementById("simulation");
-            const simulation = new BMEffectsFireworks.FireworkSimulation(canvas);
+            const simulation = new FireworkSimulation(canvas, 6);
             simulation.start();
         }, {passive: true});
     </script>

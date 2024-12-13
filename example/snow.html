@@ -14,19 +14,26 @@
 </head>
 <body>
 
-    <canvas id="simulation"></canvas>
+<canvas id="simulation"></canvas>
 
-    <script src="https://unpkg.com/@basmilius/effects-common@1.0.2/dist/basmilius.effects.common.umd.js"></script>
-    <script src="https://unpkg.com/@basmilius/effects-snow@1.0.2/dist/basmilius.effects.snow.umd.js"></script>
+<script type="importmap">
+    {
+        "imports": {
+            "@basmilius/effects-common": "../packages/common/dist/basmilius.effects.common.js",
+            "@basmilius/effects-snow": "../packages/snow/dist/basmilius.effects.snow.js"
+        }
+    }
+</script>
 
-    <script type="module">
-        window.addEventListener("load", () =>
-        {
-            const canvas = document.getElementById("simulation");
-            const simulation = new BMEffectsSnow.SnowSimulation(canvas);
-            simulation.start();
-        }, {passive: true});
-    </script>
+<script type="module">
+    import { SnowSimulation } from '@basmilius/effects-snow';
+
+    window.addEventListener('load', () => {
+        const canvas = document.getElementById('simulation');
+        const simulation = new SnowSimulation(canvas);
+        simulation.start();
+    }, {passive: true});
+</script>
 
 </body>
 </html>

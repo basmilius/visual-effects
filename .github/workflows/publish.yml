@@ -26,9 +26,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: 🔨 Build
-        run: pnpm build
+        run: pnpm --filter '@basmilius/*' -r --parallel build
 
       - name: 🚀 Publish
-        run: pnpm run publish
+        run: pnpm --filter '@basmilius/*' -r publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,7 +1,6 @@
 {
     "name": "@basmilius/effects",
     "private": true,
-    "version": "1.1.0",
     "author": {
         "name": "Bas Milius",
         "email": "bas@mili.us",
@@ -9,7 +8,6 @@
     },
     "scripts": {
         "build": "pnpm --filter '@basmilius/*' -r --parallel build",
-        "dev": "pnpm --filter '@basmilius/*' -r --parallel dev",
-        "publish": "pnpm --filter '@basmilius/*' -r publish --access public --no-git-checks"
+        "dev": "pnpm --filter '@basmilius/*' -r --parallel dev"
     }
 }
