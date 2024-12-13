@@ -5,6 +5,7 @@ import type { Snowflake } from './snowflake';
 export class SnowSimulation extends LimitedFrameRateCanvas {
     readonly #fillStyle: string;
     readonly #maxParticles: number;
+    readonly #size: number = 6;
     readonly #speed: number;
     #angle: number = 0;
     #ratio: number = 1;
@@ -21,6 +22,7 @@ export class SnowSimulation extends LimitedFrameRateCanvas {
 
         this.#fillStyle = canvas.dataset.fillStyle || 'rgb(255 255 255 / .75)';
         this.#maxParticles = parseInt(canvas.dataset.particles || '200');
+        this.#size = parseFloat(canvas.dataset.size || '6.0');
         this.#speed = parseFloat(canvas.dataset.speed || '2.0');
 
         if (this.isSmall) {
@@ -32,7 +34,7 @@ export class SnowSimulation extends LimitedFrameRateCanvas {
                 x: MULBERRY.next(),
                 y: MULBERRY.next() - 1,
                 density: MULBERRY.next() * this.#maxParticles,
-                radius: MULBERRY.next() * 6 + 2
+                radius: MULBERRY.next() * this.#size + 2
             });
         }
     }
