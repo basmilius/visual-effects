@@ -1,7 +1,7 @@
 {
     "name": "@basmilius/effects-snow",
     "license": "MIT",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "author": {
         "email": "bas@mili.us",
         "name": "Bas Milius",
@@ -44,7 +44,7 @@
         "@basmilius/effects-common": "workspace:*"
     },
     "devDependencies": {
-        "esbuild": "^0.24.0",
+        "esbuild": "^0.24.2",
         "tsc-alias": "^1.8.10",
         "typescript": "^5.7.2"
     }
