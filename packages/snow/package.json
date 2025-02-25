@@ -1,7 +1,7 @@
 {
     "name": "@basmilius/effects-snow",
     "license": "MIT",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "author": {
         "email": "bas@mili.us",
         "name": "Bas Milius",
@@ -13,16 +13,15 @@
         "directory": "packages/snow"
     },
     "scripts": {
-        "build": "pnpm esbuild && pnpm gentypes",
-        "dev": "pnpm esbuild --watch",
-        "esbuild": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/basmilius.effects.snow.js",
-        "gentypes": "tsc && tsc-alias"
+        "build": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/basmilius.effects.snow.js && tsc && tsc-alias",
+        "dev": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/basmilius.effects.snow.js --watch"
     },
     "engines": {
-        "node": ">=22"
+        "node": ">=23"
     },
     "files": [
-        "dist/*"
+        "dist",
+        "src"
     ],
     "publishConfig": {
         "access": "public",
@@ -44,7 +43,7 @@
         "@basmilius/effects-common": "workspace:*"
     },
     "devDependencies": {
-        "esbuild": "^0.24.2",
+        "esbuild": "^0.25.0",
         "tsc-alias": "^1.8.10",
         "typescript": "^5.7.3"
     }

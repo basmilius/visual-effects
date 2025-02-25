@@ -6,8 +6,7 @@
         "email": "bas@mili.us",
         "url": "https://bas.dev"
     },
-    "scripts": {
-        "build": "pnpm --filter '@basmilius/*' -r --parallel build",
-        "dev": "pnpm --filter '@basmilius/*' -r --parallel dev"
-    }
+    "workspaces": [
+        "packages/*"
+    ]
 }
