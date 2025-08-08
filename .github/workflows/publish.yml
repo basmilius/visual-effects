@@ -4,6 +4,9 @@ on:
     release:
         types: [ published ]
 
+env:
+    RELEASE_VERSION: ${{ github.event.release.tag_name }}
+
 permissions:
     id-token: write
 
@@ -20,13 +23,23 @@ jobs:
             -   name: 📦️ Install dependencies
                 run: bun install --frozen-lockfile
 
+            -   name: ✏️ Tag v${{ env.RELEASE_VERSION }}
+                run: |
+                    bun pm version --cwd packages/common ${{ env.RELEASE_VERSION }}
+                    bun pm version --cwd packages/fireworks ${{ env.RELEASE_VERSION }}
+                    bun pm version --cwd packages/snow ${{ env.RELEASE_VERSION }}
+                    
+                    sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/common/package.json
+                    sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/fireworks/package.json
+                    sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/snow/package.json
+
             -   name: 🔨 Build
                 run: |
-                    bun run --cwd packages/common build
-                    bun run --cwd packages/fireworks build
-                    bun run --cwd packages/snow build
+                    bun --cwd packages/common build
+                    bun --cwd packages/fireworks build
+                    bun --cwd packages/snow build
 
-            -   name: 🚀 Publish
+            -   name: 🚀 Publish v${{ env.RELEASE_VERSION }}
                 run: |
                     bun publish --cwd packages/common --access public
                     bun publish --cwd packages/fireworks --access public

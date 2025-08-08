@@ -1,7 +1,7 @@
 {
     "name": "@basmilius/effects-fireworks",
     "license": "MIT",
-    "version": "1.4.0",
+    "version": "0.0.0",
     "author": {
         "email": "bas@mili.us",
         "name": "Bas Milius",
@@ -13,8 +13,8 @@
         "directory": "packages/fireworks"
     },
     "scripts": {
-        "build": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/basmilius.effects.fireworks.js && tsc && tsc-alias",
-        "dev": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/basmilius.effects.fireworks.js --watch"
+        "build": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/index.js && tsc && tsc-alias",
+        "dev": "esbuild src/index.ts --bundle --sourcemap --external:@basmilius/effects-common --platform=browser --target=esnext --format=esm --outfile=dist/index.js --watch"
     },
     "engines": {
         "node": ">=23"
@@ -28,23 +28,23 @@
         "provenance": true
     },
     "type": "module",
-    "main": "./dist/basmilius.effects.fireworks.js",
-    "module": "./dist/basmilius.effects.fireworks.js",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
     "types": "./src/index.ts",
     "typings": "./src/index.ts",
     "sideEffects": false,
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "default": "./dist/basmilius.effects.fireworks.js"
+            "default": "./dist/index.js"
         }
     },
     "dependencies": {
         "@basmilius/effects-common": "workspace:*"
     },
     "devDependencies": {
-        "esbuild": "^0.25.0",
-        "tsc-alias": "^1.8.11",
-        "typescript": "^5.8.2"
+        "esbuild": "^0.25.8",
+        "tsc-alias": "^1.8.16",
+        "typescript": "^5.9.2"
     }
 }
