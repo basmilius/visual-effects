@@ -40,11 +40,11 @@
         }
     },
     "dependencies": {
-        "@basmilius/utils": "^2.8.1"
+        "@basmilius/utils": "^2.11.0"
     },
     "devDependencies": {
-        "esbuild": "^0.25.8",
+        "esbuild": "^0.25.11",
         "tsc-alias": "^1.8.16",
-        "typescript": "^5.9.2"
+        "typescript": "^5.9.3"
     }
 }
